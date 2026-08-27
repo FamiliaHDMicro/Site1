@@ -79,6 +79,8 @@ Fotos, vídeos, músicas, cartões, senhas, documentos e tokens não pertencem a
 
 O primeiro teste deve usar credenciais de teste, sem cobrança real. A própria documentação do Mercado Pago informa que os pagamentos de teste não disparam notificações reais; a recepção de Webhook deve ser conferida pelo simulador de notificações no painel. Só depois do teste de criação, validação, código e aviso interno é que se considera produção. [4]
 
+Para Checkout Pro, o servidor cria uma preferência no endpoint oficial, usando o Access Token de teste no cabeçalho de autorização. A resposta fornece o endereço de sandbox para iniciar a compra de teste. A Public Key de teste pode ser usada pelo frontend em integrações que a exigem, mas não substitui o Access Token privado do servidor. O Mercado Pago recomenda usar credenciais de teste durante todo o desenvolvimento; elas não realizam transações reais. [4] [6] [7]
+
 ## Referências
 
 [1] [Cloudflare D1 — Limits](https://developers.cloudflare.com/d1/platform/limits/)  
@@ -86,3 +88,6 @@ O primeiro teste deve usar credenciais de teste, sem cobrança real. A própria 
 [3] [Cloudflare D1 — Time Travel and backups](https://developers.cloudflare.com/d1/reference/time-travel/)  
 [4] [Mercado Pago — Webhooks](https://www.mercadopago.com.br/developers/pt/docs/your-integrations/notifications/webhooks)  
 [5] [Telegram — Bot API](https://core.telegram.org/bots/api)
+[6] [Mercado Pago — Credenciais de teste](https://www.mercadopago.com.br/developers/en/docs/checkout-pro/additional-content/credentials)  
+[7] [Mercado Pago — Criar preferência do Checkout Pro](https://www.mercadopago.com.br/developers/en/reference/online-payments/checkout-pro/preferences/create-preference/post)  
+[8] [Mercado Pago — Compras de teste](https://www.mercadopago.com.br/developers/en/docs/checkout-pro/integration-test/test-purchases)

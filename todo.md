@@ -32,4 +32,12 @@
 - [x] Implementar tela local de pedido e ativação simulada, sem Mercado Pago, D1, bot, upload ou dados persistentes.
 - [x] Definir que, no primeiro lançamento, o bot será apenas um aviso interno ao proprietário e não enviará código ao cliente.
 - [ ] Estruturar a taxa de implantação e o que a manutenção mensal de R$ 39,00 ou R$ 49,00 entrega.
+- [ ] Atualizar a página com planos gastronômicos de implantação e manutenção mensal, deixando limites explícitos.
+- [ ] Criar wizard local para organizar de 12 a 20 itens, categorias, preço e disponibilidade do cardápio.
+- [ ] Preparar somente credenciais e notificações de teste do Mercado Pago; proibir credenciais e cobranças de produção.
+- [ ] Guardar a assinatura do Webhook de teste exclusivamente nas configurações protegidas do servidor.
+- [ ] Salvar pedidos de teste com dados mínimos e apagar a simulação de forma explícita.
+- [x] Auditar em modo somente-leitura o painel HTML do repositório histórico antes de reaproveitar qualquer código.
+- [x] Usar uma cópia local e superficial do repositório histórico, sem abrir o painel Cloudflare durante a comparação.
 - [ ] Tratar impressão e PDV como adicionais após validar pedido direto por WhatsApp.
+- [x] Manter o painel.html e o Worker antigos como referência histórica, sem misturá-los automaticamente à versão atual.
