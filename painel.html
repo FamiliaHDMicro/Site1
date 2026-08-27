@@ -5,156 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Configurar Meu Microsite - Painel</title>
     <style>
-        /* Reset e Configurações Base */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Arial, sans-serif;
-        }
-
-        body {
-            background-color: #0d0d0d; /* Preto Profundo */
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        /* Container do Formulário */
-        .form-container {
-            background-color: #121212; /* Grafite escuro */
-            border: 2px solid #1a0f2b; /* Borda Roxa Sutil */
-            border-radius: 16px;
-            padding: 35px 25px;
-            max-width: 480px;
-            width: 100%;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-        }
-
-        h1 {
-            color: #ff5500; /* Laranja Vibrante */
-            font-size: 26px;
-            font-weight: 900;
-            text-transform: uppercase;
-            text-align: center;
-            margin-bottom: 5px;
-            letter-spacing: -0.5px;
-        }
-
-        .subtitle {
-            color: #b3b3b3;
-            font-size: 14px;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        /* Grupos do Formulário */
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            color: #ffcc00; /* Amarelo Mostarda para rótulos */
-            font-size: 13px;
-            font-weight: bold;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-            letter-spacing: 0.5px;
-        }
-
-        /* Inputs de Texto e URL */
-        input[type="text"], input[type="url"], select {
-            width: 100%;
-            padding: 14px;
-            background-color: #1a0f2b; /* Fundo Roxo Fechado */
-            border: 1px solid #331a4d;
-            border-radius: 8px;
-            color: #ffffff;
-            font-size: 15px;
-            transition: border-color 0.2s ease;
-        }
-
-        input[type="text"]:focus, input[type="url"]:focus, select:focus {
-            outline: none;
-            border-color: #ff5500; /* Destaque em Laranja ao focar */
-        }
-
-        /* Customização do Select */
-        select {
-            cursor: pointer;
-            appearance: none;
-            background-image: url("data:image/svg+xml;utf8,<svg fill='%23ff5500' height='24' viewBox='0 0 24 24' width='24' xmlns='http://w3.org'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
-            background-repeat: no-repeat;
-            background-position: right 12px center;
-        }
-
-        .help-text {
-            color: #8c8c8c;
-            font-size: 12px;
-            margin-top: 5px;
-        }
-
-        /* Botão Grande Laranja */
-        .btn-submit {
-            background-color: #ff5500;
-            color: #ffffff;
-            font-size: 16px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border: none;
-            padding: 16px;
-            width: 100%;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-top: 15px;
-            transition: background-color 0.2s ease, transform 0.1s ease;
-            box-shadow: 0 4px 15px rgba(255, 85, 0, 0.3);
-        }
-
-        .btn-submit:hover {
-            background-color: #e04b00;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background-color: #0d0d0d; color: #ffffff; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+        .form-container { background-color: #121212; border: 2px solid #1a0f2b; border-radius: 16px; padding: 35px 25px; max-width: 480px; width: 100%; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7); }
+        h1 { color: #ff5500; font-size: 26px; font-weight: 900; text-transform: uppercase; text-align: center; margin-bottom: 5px; letter-spacing: -0.5px; }
+        .subtitle { color: #b3b3b3; font-size: 14px; text-align: center; margin-bottom: 30px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; color: #ffcc00; font-size: 13px; font-weight: bold; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
+        input[type="text"], input[type="url"], select { width: 100%; padding: 14px; background-color: #1a0f2b; border: 1px solid #331a4d; border-radius: 8px; color: #ffffff; font-size: 15px; transition: border-color 0.2s ease; }
+        input[type="text"]:focus, input[type="url"]:focus, select:focus { outline: none; border-color: #ff5500; }
+        select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml;utf8,<svg fill='%23ff5500' height='24' viewBox='0 0 24 24' width='24' xmlns='http://w3.org'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>"); background-repeat: no-repeat; background-position: right 12px center; }
+        .help-text { color: #8c8c8c; font-size: 12px; margin-top: 5px; }
+        .btn-submit { background-color: #ff5500; color: #ffffff; font-size: 16px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; border: none; padding: 16px; width: 100%; border-radius: 8px; cursor: pointer; margin-top: 15px; transition: background-color 0.2s ease; box-shadow: 0 4px 15px rgba(255, 85, 0, 0.3); }
+        .btn-submit:hover { background-color: #e04b00; }
     </style>
 </head>
 <body>
-
     <div class="form-container">
         <h1>Alimente a Máquina</h1>
         <p class="subtitle">Monte seu microsite customizado em menos de 1 minuto</p>
-
         <form id="micrositeForm">
-            <!-- SELEÇÃO DE MODELOS -->
             <div class="form-group">
                 <label for="template">1. Escolha o seu Modelo (1 de 12)</label>
                 <select id="template" required>
                     <option value="" disabled selected>Clique para selecionar...</option>
-                    
                     <optgroup label="Adolescente / Aesthetic">
                         <option value="ado_1">Modelo 01 - Redes & Vídeos</option>
                         <option value="ado_2">Modelo 02 - Vibes Neon</option>
                         <option value="ado_3">Modelo 03 - Portfólio Gamer</option>
                         <option value="ado_4">Modelo 04 - Minimalista TikTok</option>
                     </optgroup>
-
                     <optgroup label="Romântico / Casais">
                         <option value="rom_1">Modelo 05 - Nossa Linha do Tempo</option>
                         <option value="rom_2">Modelo 06 - Álbum de Memórias</option>
                         <option value="rom_3">Modelo 07 - Carta de Amor Digital</option>
                         <option value="rom_4">Modelo 08 - Playlist do Casal</option>
                     </optgroup>
-
                     <optgroup label="Empresarial / Vendas">
                         <option value="emp_1">Modelo 09 - Link na Bio Profissional</option>
                         <option value="emp_2">Modelo 10 - Vitrine de Afiliado</option>
                         <option value="emp_3">Modelo 11 - Cartão de Visita Digital</option>
                         <option value="emp_4">Modelo 12 - Captura de Leads / Whats</option>
                     </optgroup>
-
                     <optgroup label="Presente / Homenagens">
                         <option value="pre_1">Modelo 13 - Parabéns Interativo</option>
                         <option value="pre_2">Modelo 14 - Caixa Surpresa Virtual</option>
@@ -163,65 +55,48 @@
                     </optgroup>
                 </select>
             </div>
-
-            <!-- URL DA FOTO -->
             <div class="form-group">
                 <label for="photoUrl">2. Link da sua Imagem Principal</label>
                 <input type="url" id="photoUrl" placeholder="https://exemplo.com" required>
-                <p class="help-text">Insira o link direto da imagem do seu produto ou foto.</p>
             </div>
-
-            <!-- URL DA MÚSICA -->
             <div class="form-group">
                 <label for="musicUrl">3. Link da Música de Fundo</label>
                 <input type="url" id="musicUrl" placeholder="https://spotify.com..." required>
-                <p class="help-text">Links compartilhados do Spotify ou YouTube.</p>
             </div>
-
-            <!-- URL DO VÍDEO -->
             <div class="form-group">
                 <label for="videoUrl">4. Link do Vídeo (Opcional)</label>
                 <input type="url" id="videoUrl" placeholder="https://youtube.com...">
             </div>
-
             <button type="submit" class="btn-submit">Gerar Meu Microsite</button>
         </form>
     </div>
 
-    <!-- SCRIPT INTEGRAÇÃO COM O CÉREBRO (GERAR.JS) -->
     <script>
         document.getElementById('micrositeForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-
             const dadosDoSite = {
                 template: document.getElementById('template').value,
                 photoUrl: document.getElementById('photoUrl').value,
                 musicUrl: document.getElementById('musicUrl').value,
                 videoUrl: document.getElementById('videoUrl').value
             };
-
             try {
-                // Envia direto para a API dentro de functions/api/gerar.js
-                const resposta = await fetch('/api/gerar', {
+                // APONTANDO DIRETAMENTE PARA O SEU WORKER
+                const resposta = await fetch('https://workers.dev', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(dadosDoSite)
                 });
-
                 const resultado = await resposta.json();
-
                 if (resposta.ok) {
-                    alert('Sucesso! A máquina gerou seu link: ' + resultado.link);
-                    // Aqui você pode redirecionar o usuário para o link gerado se quiser
+                    alert('Sucesso! A máquina gerou seu link. Abra no seu navegador: ' + window.location.origin + resultado.link);
                 } else {
                     alert('Erro na máquina: ' + (resultado.erro || 'Tente novamente.'));
                 }
             } catch (erro) {
-                console.error('Erro na conexão:', erro);
                 alert('Erro de comunicação com o servidor central.');
             }
         });
     </script>
 </body>
 </html>
-
