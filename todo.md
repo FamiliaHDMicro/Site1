@@ -31,12 +31,20 @@
 - [x] Exibir, na simulação local, o estado e o código de ativação na página do cliente, sem depender de WhatsApp.
 - [x] Implementar tela local de pedido e ativação simulada, sem Mercado Pago, D1, bot, upload ou dados persistentes.
 - [x] Definir que, no primeiro lançamento, o bot será apenas um aviso interno ao proprietário e não enviará código ao cliente.
-- [ ] Estruturar a taxa de implantação e o que a manutenção mensal de R$ 39,00 ou R$ 49,00 entrega.
-- [ ] Atualizar a página com planos gastronômicos de implantação e manutenção mensal, deixando limites explícitos.
-- [ ] Criar wizard local para organizar de 12 a 20 itens, categorias, preço e disponibilidade do cardápio.
-- [ ] Preparar somente credenciais e notificações de teste do Mercado Pago; proibir credenciais e cobranças de produção.
-- [ ] Guardar a assinatura do Webhook de teste exclusivamente nas configurações protegidas do servidor.
-- [ ] Salvar pedidos de teste com dados mínimos e apagar a simulação de forma explícita.
+- [x] Atualizar a interface com OneFood 01, OneFood 02 e OneFood 03, cada um com liberação única de R$100,00 e mensalidade própria.
+- [x] Definir a mensalidade OneFood: R$29,00 para 12 produtos/imagens, R$49,00 para 20 produtos/imagens e R$69,00 para 30 produtos/imagens.
+- [ ] Definir as regras de vídeos e músicas de cada template OneFood antes de exibir a oferta comercial final.
+- [x] Criar wizard local OneFood para organizar de 12, 20 ou 30 itens, categoria, preço, link de imagem e disponibilidade.
+- [x] Corrigir o catálogo: 12 templates gerais são modelos de microsite, não módulos de conteúdo.
+- [x] Definir os 12 templates gerais em quatro grupos: 3 adolescente, 3 business, 3 presentes e 3 namoro/casamento/comemorações.
+- [x] Criar uma família separada com OneFood 01, OneFood 02 e OneFood 03, sem misturá-la aos 12 templates gerais.
+- [x] Substituir listas longas por seleção horizontal com abas e etapas numeradas, sem rolagem infinita.
+- [x] Bloquear o fluxo de sandbox quando a credencial não comprovar que gera apenas um endereço sandbox do Checkout Pro.
+- [x] Validar o Access Token pela criação controlada de uma preferência sandbox, sem deduzir o ambiente pelo prefixo da chave.
+- [ ] Rotacionar o token e a assinatura de Webhook já expostos em conversa antes de considerar os segredos protegidos.
+- [x] Salvar pedidos de teste com dados mínimos e apagar a simulação de forma explícita.
+- [ ] Executar manualmente um Checkout Pro sandbox e conferir o retorno do Webhook antes de permitir qualquer uso comercial.
+- [ ] Rotacionar as credenciais do Mercado Pago expostas em conversa antes de qualquer integração de produção.
 - [x] Auditar em modo somente-leitura o painel HTML do repositório histórico antes de reaproveitar qualquer código.
 - [x] Usar uma cópia local e superficial do repositório histórico, sem abrir o painel Cloudflare durante a comparação.
 - [ ] Tratar impressão e PDV como adicionais após validar pedido direto por WhatsApp.

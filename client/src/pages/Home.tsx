@@ -34,6 +34,9 @@ import {
   Video,
 } from "lucide-react";
 import { toast } from "sonner";
+import GastronomyStudio from "@/components/GastronomyStudio";
+import TemplatePicker, { type TemplateChoice } from "@/components/TemplatePicker";
+import TestCheckoutPanel from "@/components/TestCheckoutPanel";
 
 type Module = {
   code: string;
@@ -43,6 +46,25 @@ type Module = {
 };
 
 type ActivationStage = "idle" | "waiting" | "active";
+
+type RestaurantPlan = {
+  id: string;
+  label: string;
+  implementation: string;
+  monthly: string;
+  itemLimit: number;
+  changes: string;
+  detail: string;
+};
+
+type MenuItem = {
+  id: string;
+  category: string;
+  name: string;
+  description: string;
+  price: string;
+  available: boolean;
+};
 
 const generalModules: Module[] = [
   { code: "M01", name: "Capa de impacto", description: "Apresentação direta do negócio", Icon: Sparkles },
@@ -101,6 +123,7 @@ function jumpTo(id: string) {
 
 export default function Home() {
   const [selectedPlan, setSelectedPlan] = useState("base");
+  const [chosenTemplate, setChosenTemplate] = useState<TemplateChoice | null>(null);
   const [selectedModules, setSelectedModules] = useState<string[]>([
     "Capa de impacto",
     "Contato rápido",
@@ -127,10 +150,10 @@ export default function Home() {
     const brief = [
       "BRIEFING SITEONE — HDMICRO",
       `Negócio: ${projectName.trim() || "a definir"}`,
-      `Plano: ${activePlan.label} (${activePlan.price})`,
-      `Conteúdo incluído: ${activePlan.total}`,
-      `Módulos escolhidos: ${chosenModules.map((module) => module.name).join(", ") || "a definir"}`,
-      `Tamanho inicial do cardápio: ${menuRange}`,
+      `Template: ${chosenTemplate?.label || "a definir"}`,
+      `Família: ${chosenTemplate?.family || "a definir"}`,
+      chosenTemplate?.price ? `Valor OneFood: ${chosenTemplate.price}` : "Valor: a definir conforme o template escolhido",
+      chosenTemplate?.limit ? `Limites OneFood: ${chosenTemplate.limit}` : "Conteúdo: preencher conforme o template escolhido",
       `Vídeo informado: ${videoSource}`,
       "Observação: este texto é um pedido de orçamento. Nenhum envio automático foi realizado.",
     ].join("\n");
@@ -190,13 +213,13 @@ export default function Home() {
           <span className="brand-product">SiteOne <i>microsites</i></span>
         </a>
         <nav className="topnav" aria-label="Navegação principal">
-          <a href="#modulos">Módulos</a>
-          <a href="#gastronomia">Restaurantes</a>
+          <a href="#templates">Templates</a>
+          <a href="#templates">OneFood</a>
           <a href="#ativacao">Simulação</a>
           <a href="#regras">Regras</a>
         </nav>
-        <button className="nav-cta" type="button" onClick={() => jumpTo("montagem")}>
-          Montar o meu <ArrowDownRight size={17} />
+        <button className="nav-cta" type="button" onClick={() => jumpTo("templates")}>
+          Escolher template <ArrowDownRight size={17} />
         </button>
       </header>
 
@@ -211,10 +234,10 @@ export default function Home() {
                 A HDMicro organiza a montagem do seu microsite com regras claras.
               </p>
               <div className="hero-actions">
-                <button className="primary-btn" type="button" onClick={() => jumpTo("montagem")}>
-                  Escolher módulos <ArrowDownRight size={19} />
+                <button className="primary-btn" type="button" onClick={() => jumpTo("templates")}>
+                  Escolher template <ArrowDownRight size={19} />
                 </button>
-                <button className="text-btn" type="button" onClick={() => jumpTo("gastronomia")}>
+                <button className="text-btn" type="button" onClick={() => jumpTo("templates")}>
                   Tenho restaurante <ArrowUpRight size={17} />
                 </button>
               </div>
@@ -274,6 +297,8 @@ export default function Home() {
             </article>
           </div>
         </section>
+
+        <TemplatePicker onChoose={setChosenTemplate} />
 
         <section className="modules-section" id="modulos" aria-labelledby="modules-title">
           <div className="modules-heading">
@@ -387,6 +412,10 @@ export default function Home() {
           </div>
         </section>
 
+        {chosenTemplate?.family === "onefood" && (
+          <GastronomyStudio key={chosenTemplate.id} businessName={projectName} initialPlanId={chosenTemplate.id} />
+        )}
+
         <section className="brief-section" id="montagem" aria-labelledby="brief-title">
           <div className="brief-heading">
             <p className="eyebrow"><span /> SEU BRIEFING</p>
@@ -405,20 +434,8 @@ export default function Home() {
             </label>
             <div className="brief-local-options" aria-label="Opções locais para a demonstração">
               <div className="local-option-group">
-                <span>TAMANHO INICIAL DO CARDÁPIO</span>
-                <div>
-                  {["Até 12 itens", "13 a 20 itens", "Mais de 20 itens"].map((range) => (
-                    <button
-                      key={range}
-                      type="button"
-                      className={menuRange === range ? "is-selected" : ""}
-                      onClick={() => setMenuRange(range)}
-                      aria-pressed={menuRange === range}
-                    >
-                      {range}
-                    </button>
-                  ))}
-                </div>
+                <span>TEMPLATE ESCOLHIDO</span>
+                <div><button type="button" className="is-selected" onClick={() => jumpTo("templates")}>{chosenTemplate?.label || "Escolher template"}</button></div>
               </div>
               <div className="local-option-group">
                 <span>VÍDEO NA PRIMEIRA VERSÃO</span>
@@ -438,10 +455,10 @@ export default function Home() {
               </div>
             </div>
             <div className="brief-summary">
-              <div className="summary-topline"><span>RESUMO DE MONTAGEM</span><span>{chosenModules.length} MÓDULOS</span></div>
-              <div className="summary-plan"><span>{activePlan.label}</span><strong>{activePlan.price}</strong><small>{activePlan.total}</small></div>
+              <div className="summary-topline"><span>RESUMO DE MONTAGEM</span><span>{chosenTemplate ? "1 TEMPLATE" : "AGUARDA ESCOLHA"}</span></div>
+              <div className="summary-plan"><span>{chosenTemplate?.label || "Escolha um template"}</span><strong>{chosenTemplate?.price || "—"}</strong><small>{chosenTemplate?.limit || "Comece pela etapa 01: escolha o modelo."}</small></div>
               <div className="summary-tags">
-                {chosenModules.length > 0 ? chosenModules.map((module) => <span key={module.code}>{module.code} {module.name}</span>) : <p>Selecione módulos acima para montar seu briefing.</p>}
+                {chosenTemplate ? <span>TEMPLATE {chosenTemplate.label} · {chosenTemplate.family}</span> : <p>Escolha um template acima para montar seu briefing.</p>}
               </div>
             </div>
             <button className="copy-brief" type="button" onClick={copyBriefing}>
@@ -455,7 +472,7 @@ export default function Home() {
           <div className="activation-intro">
             <p className="eyebrow"><span /> ESTAÇÃO · ATIVAÇÃO</p>
             <h2 id="activation-title">Veja o caminho antes<br />de existir uma <em>cobrança.</em></h2>
-            <p>Esta é uma demonstração local. Ela cria um número e um código apenas para você visualizar o fluxo do SiteOne; não acessa Mercado Pago, banco, bot ou WhatsApp.</p>
+            <p>A demonstração local cria um número e um código apenas para visualização. Abaixo dela, o proprietário pode abrir separadamente um Checkout Pro de sandbox, nunca uma cobrança real.</p>
             <div className="activation-assurance">
               <ShieldCheck size={20} />
               <span><b>SEM DADOS EXTERNOS</b> Tudo fica nesta tela até ela ser fechada ou recarregada.</span>
@@ -524,7 +541,8 @@ export default function Home() {
               </div>
             )}
 
-            <p className="activation-disclaimer"><KeyRound size={15} /> O código real só existirá em etapa futura, após pagamento confirmado por canal oficial e servidor protegido.</p>
+            <TestCheckoutPanel businessName={projectName} menuItemCount={chosenTemplate?.id === "onefood-03" ? 30 : chosenTemplate?.id === "onefood-02" ? 20 : 12} />
+            <p className="activation-disclaimer"><KeyRound size={15} /> A simulação local não envia dados. O Checkout Pro separado é restrito ao proprietário, usa somente sandbox e confirma o retorno pelo servidor protegido.</p>
           </div>
         </section>
 
