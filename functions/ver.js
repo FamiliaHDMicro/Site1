@@ -1,30 +1,28 @@
-export async function onRequestGet(context) {
-    try {
-        const { searchParams } = new URL(context.request.url);
-        const id = searchParams.get('id');
+    <script>
+        async function buscar() {
+            const p = new URLSearchParams(window.location.search);
+            const id = p.get('id');
+            
+            if (!id) {
+                document.getElementById('tela').innerHTML = "<h2 style='color: red;'>ID Inválido!</h2>";
+                return;
+            }
 
-        if (!id) {
-            return new Response(JSON.stringify({ erro: "ID não fornecido." }), { status: 400 });
+            try {
+                // LINK CORRIGIDO E LIMPO APONTANDO PARA O SEU WORKER REAL
+                const r = await fetch(`https://workers.dev{id}`);
+                const dados = await r.json();
+                
+                if (!r.ok) throw new Error();
+
+                document.getElementById('tela').innerHTML = `
+                    <img src="${dados.foto}" alt="Imagem">
+                    <h2>Seu Espaço Digital</h2>
+                    <a class="btn-link" href="${dados.musica}" target="_blank">👉 CLIQUE AQUI PARA OUVIR A MÚSICA</a>
+                `;
+            } catch(e) {
+                document.getElementById('tela').innerHTML = "<h2 style='color: red;'>Microsite não encontrado!</h2>";
+            }
         }
-
-        const db = context.env.DB;
-
-        // Busca o microsite no banco de dados D1
-        const resultado = await db.prepare(
-            "SELECT * FROM microsites WHERE id = ?"
-        ).bind(id).first();
-
-        if (!resultado) {
-            return new Response(JSON.stringify({ erro: "Microsite não encontrado." }), { status: 404 });
-        }
-
-        return new Response(JSON.stringify(resultado), {
-            status: 200,
-            headers: { "Content-Type": "application/json" }
-        });
-
-    } catch (erro) {
-        return new Response(JSON.stringify({ erro: "Erro ao ler a máquina: " + erro.message }), { status: 500 });
-    }
-}
-
+        buscar();
+    </script>
