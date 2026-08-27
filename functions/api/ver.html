@@ -5,83 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visualizar Microsite</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Arial, sans-serif;
-        }
-
-        body {
-            background-color: #0d0d0d; /* Fundo Preto Profundo */
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        /* Container do Biliskin (Modelo Carrd Automatizado) */
-        .skin-container {
-            background-color: #121212; /* Grafite escuro */
-            border: 2px solid #1a0f2b; /* Borda Roxa */
-            border-radius: 20px;
-            padding: 30px;
-            max-width: 420px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-        }
-
-        /* Foto Dinâmica do Usuário */
-        .user-photo {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 3px solid #ff5500; /* Borda Laranja */
-            object-fit: cover;
-            margin-bottom: 20px;
-            box-shadow: 0 0 15px rgba(255, 85, 0, 0.4);
-        }
-
-        h1 {
-            color: #ff5500;
-            font-size: 24px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        /* Player de Música Escondido / Widget */
-        .music-box {
-            background-color: #1a0f2b;
-            padding: 12px;
-            border-radius: 8px;
-            margin: 20px 0;
-            border-left: 4px solid #ffcc00;
-            font-size: 13px;
-            color: #ffcc00;
-            font-weight: bold;
-        }
-
-        /* Área de Vídeo */
-        .video-box iframe {
-            width: 100%;
-            height: 200px;
-            border-radius: 8px;
-            border: 1px solid #1a0f2b;
-            margin-top: 15px;
-        }
-
-        .loading {
-            color: #ffcc00;
-            font-size: 18px;
-            font-weight: bold;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background-color: #0d0d0d; color: #ffffff; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+        .skin-container { background-color: #121212; border: 2px solid #1a0f2b; border-radius: 20px; padding: 30px; max-width: 420px; width: 100%; text-align: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8); }
+        .user-photo { width: 120px; height: 120px; border-radius: 50%; border: 3px solid #ff5500; object-fit: cover; margin-bottom: 20px; box-shadow: 0 0 15px rgba(255, 85, 0, 0.4); }
+        h1 { color: #ff5500; font-size: 24px; margin-bottom: 10px; text-transform: uppercase; }
+        .music-box { background-color: #1a0f2b; padding: 12px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #ffcc00; font-size: 13px; color: #ffcc00; font-weight: bold; }
+        .video-box iframe { width: 100%; height: 200px; border-radius: 8px; border: 1px solid #1a0f2b; margin-top: 15px; }
+        .loading { color: #ffcc00; font-size: 18px; font-weight: bold; }
     </style>
 </head>
 <body>
-
     <div class="skin-container" id="content">
         <div class="loading">Carregando o Biliskin...</div>
     </div>
@@ -90,44 +24,34 @@
         async function carregarMicrosite() {
             const urlParams = new URLSearchParams(window.location.search);
             const id = urlParams.get('id');
-
             if (!id) {
                 document.getElementById('content').innerHTML = "<h1>Erro: ID Inválido</h1>";
                 return;
             }
-
             try {
-                // Chama o cérebro ver.js para pegar as fotos e músicas do banco
-                const resposta = await fetch(`/api/ver?id=${id}`);
+                // APONTANDO DIRETAMENTE PARA O SEU WORKER PARA FAZER A LEITURA
+                const resposta = await fetch(`https://workers.dev{id}`);
                 if (!resposta.ok) throw new Error();
-                
                 const dados = await resposta.json();
 
-                // Monta o Biliskin na tela com os dados reais do banco
                 document.getElementById('content').innerHTML = `
-                    <img src="${dados.foto}" class="user-photo" alt="Foto do Usuário">
+                    <img src="${dados.foto}" class="user-photo" alt="Foto">
                     <h1>Seu Espaço Digital</h1>
-                    
                     <div class="music-box">
                         🎵 MÚSICA CONFIGURADA:<br>
-                        <a href="${dados.musica}" target="_blank" style="color: #fff; text-decoration: none;">Clique aqui para ouvir o som</a>
+                        <a href="${dados.musica}" target="_blank" style="color: #fff; text-decoration: none;">Clique para ouvir o som</a>
                     </div>
-
                     ${dados.video ? `
                         <div class="video-box">
-                            <p style="color: #b3b3b3; font-size: 12px; margin-bottom: 5px; text-transform: uppercase;">Vídeo Destacado</p>
                             <iframe src="${dados.video.replace('watch?v=', 'embed/')}" frameborder="0" allowfullscreen></iframe>
                         </div>
                     ` : ''}
                 `;
-
             } catch (erro) {
                 document.getElementById('content').innerHTML = "<h1>Microsite não encontrado na máquina</h1>";
             }
         }
-
         carregarMicrosite();
     </script>
 </body>
 </html>
-
