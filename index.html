@@ -1,1 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Máquina de Microsites - Home</title>
+    <style>
+        /* Reset de Estilos Base */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #0d0d0d; /* Fundo Preto Profundo */
+            color: #ffffff; /* Texto Branco para legibilidade */
+            font-family: 'Segoe UI', Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Container Centralizado Estilo Carrd */
+        .carrd-wrapper {
+            background-color: #121212; /* Grafite bem escuro */
+            border: 2px solid #1a0f2b; /* Borda Roxa Sutil */
+            border-radius: 16px;
+            padding: 40px 30px;
+            max-width: 480px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            text-align: center;
+        }
+
+        /* Títulos de Alto Impacto */
+        h1 {
+            color: #ff5500; /* Laranja Vibrante da Referência */
+            font-size: 32px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: #b3b3b3; /* Cinza claro para descrição sem cansar a vista */
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+
+        /* Caixa de Alerta/Aviso Amarela */
+        .badge-warning {
+            background-color: #ffcc00; /* Amarelo Mostarda */
+            color: #0d0d0d;
+            font-size: 13px;
+            font-weight: bold;
+            padding: 6px 12px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+
+        /* Botão Grande Laranja */
+        .btn-action {
+            background-color: #ff5500; /* Laranja Principal */
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
+            padding: 16px 32px;
+            width: 100%;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            box-shadow: 0 4px 15px rgba(255, 85, 0, 0.3);
+        }
+
+        .btn-action:hover {
+            background-color: #e04b00;
+            transform: translateY(-2px);
+        }
+
+        .btn-action:active {
+            transform: translateY(0);
+        }
+
+        /* Bloco Roxo Secundário para informações internas */
+        .info-block {
+            background-color: #1a0f2b; /* Roxo Fechado */
+            border-left: 4px solid #ff5500;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: left;
+            margin-top: 25px;
+        }
+
+        .info-block h3 {
+            color: #ffcc00;
+            font-size: 14px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .info-block p {
+            font-size: 13px;
+            color: #d9d9d9;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="carrd-wrapper">
+        <div class="badge-warning">Foco em Conversão</div>
+        
+        <h1>Esse espaço<br>é seu, mano.</h1>
+        
+        <p>Escolha entre os 12 modelos disponíveis, configure suas fotos, músicas e vídeos. Deixe o sistema rodar por você.</p>
+        
+        <!-- Botão que joga o usuário para a página do formulário -->
+        <button class="btn-action">Começar Configuração</button>
+
+        <!-- Bloco de Suporte Roxo -->
+        <div class="info-block">
+            <h3>Terminal de Controle</h3>
+            <p>Seus dados serão processados de forma centralizada e distribuídos de graça via Cloudflare Pages.</p>
+        </div>
+    </div>
+
+    <!-- Script de Redirecionamento -->
+    <script>
+        document.querySelector('.btn-action').addEventListener('click', function() {
+            window.location.href = 'painel.html';
+        });
+    </script>
+</body>
+</html>
 
