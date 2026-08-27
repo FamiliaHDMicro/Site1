@@ -9,3 +9,27 @@
 - [x] Exibir regras comerciais claras e itens que dependem de orçamento separado.
 - [x] Implementar resumo do briefing e cópia local do pedido, sem envio automático.
 - [x] Verificar visual em desktop e mobile, aplicar revisão e salvar checkpoint.
+- [ ] Definir o conjunto mínimo de dados que o cliente poderá salvar no pedido de microsite.
+- [ ] Avaliar a integração oficial com Cloudflare D1 e as permissões necessárias.
+- [ ] Evoluir a montagem para uma experiência móvel persistente, sem instalação no celular.
+- [ ] Separar vídeo do YouTube de vídeo enviado pelo cliente e definir regras de uso.
+- [ ] Revisar preço, escopo, prazo e custo real do pacote gastronômico antes de publicá-lo.
+- [ ] Definir fluxo de consentimento e limites para fotos enviadas pelo celular.
+- [ ] Planejar armazenamento separado de mídia, sem usar o D1 para arquivos.
+- [ ] Implementar primeiro o pedido por WhatsApp antes de qualquer impressão automática.
+- [ ] Avaliar integrações de impressora e PDV como módulo profissional opcional.
+- [ ] Confirmar taxas e condições oficiais dos marketplaces antes de usar comparações na página comercial.
+- [ ] Definir um D1 principal, identificadores únicos e política de backup antes de copiar dados para outros bancos.
+- [ ] Definir os limites de itens, categorias e revisões em cada plano gastronômico.
+- [ ] Confirmar se a cota de armazenamento é compartilhada entre os D1 da conta antes de usar 79% como gatilho de arquivamento.
+- [ ] Especificar o mapa de localização de cada loja e pedido antes de mover dados antigos do D1 principal para uma base de arquivo.
+- [ ] Criar primeiro um alerta de ocupação em 79%; somente depois de teste aprovar transferência automatizada por Worker e Cron.
+- [ ] Confirmar a integração oficial com o Mercado Pago antes de aceitar pagamentos na página.
+- [ ] Definir um código de ativação aleatório, único, temporário e de uso único, sem dados pessoais embutidos.
+- [ ] Confirmar pagamento no servidor pelo canal oficial antes de liberar a ativação; não confiar apenas na tela ou mensagem do cliente.
+- [ ] Limitar avisos do bot ao identificador do pedido e ao estado aprovado, sem dados de pagamento ou dados pessoais completos.
+- [x] Exibir, na simulação local, o estado e o código de ativação na página do cliente, sem depender de WhatsApp.
+- [x] Implementar tela local de pedido e ativação simulada, sem Mercado Pago, D1, bot, upload ou dados persistentes.
+- [x] Definir que, no primeiro lançamento, o bot será apenas um aviso interno ao proprietário e não enviará código ao cliente.
+- [ ] Estruturar a taxa de implantação e o que a manutenção mensal de R$ 39,00 ou R$ 49,00 entrega.
+- [ ] Tratar impressão e PDV como adicionais após validar pedido direto por WhatsApp.

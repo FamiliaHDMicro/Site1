@@ -1,6 +1,7 @@
 /**
  * SiteOne — Oficina Editorial Azul: uma bancada de montagem de microsites
- * clara, técnica e acolhedora, com azul HDMicro, papel quente e laranja gastronômico.
+ * clara, técnica e acolhedora. A estação de ativação é um fluxo local de demonstração,
+ * com azul HDMicro, papel quente e laranja gastronômico — sem pagamento ou dados externos.
  */
 import { useMemo, useState } from "react";
 import type { LucideIcon } from "lucide-react";
@@ -12,17 +13,21 @@ import {
   CalendarDays,
   Camera,
   Check,
+  ClipboardCheck,
   CircleHelp,
   Clock3,
   Copy,
   FileText,
   Image as ImageIcon,
+  KeyRound,
   MapPin,
   MessageCircle,
   Music2,
   PhoneCall,
   Play,
+  RotateCcw,
   Share2,
+  ShieldCheck,
   Sparkles,
   Store,
   UtensilsCrossed,
@@ -36,6 +41,8 @@ type Module = {
   description: string;
   Icon: LucideIcon;
 };
+
+type ActivationStage = "idle" | "waiting" | "active";
 
 const generalModules: Module[] = [
   { code: "M01", name: "Capa de impacto", description: "Apresentação direta do negócio", Icon: Sparkles },
@@ -100,6 +107,11 @@ export default function Home() {
     "Localização",
   ]);
   const [projectName, setProjectName] = useState("");
+  const [menuRange, setMenuRange] = useState("Até 12 itens");
+  const [videoSource, setVideoSource] = useState("Link do YouTube");
+  const [activationStage, setActivationStage] = useState<ActivationStage>("idle");
+  const [simulationReference, setSimulationReference] = useState("");
+  const [simulationCode, setSimulationCode] = useState("");
 
   const activePlan = plans.find((plan) => plan.id === selectedPlan) ?? plans[0];
   const allModules = useMemo(() => [...generalModules, ...foodModules], []);
@@ -118,6 +130,8 @@ export default function Home() {
       `Plano: ${activePlan.label} (${activePlan.price})`,
       `Conteúdo incluído: ${activePlan.total}`,
       `Módulos escolhidos: ${chosenModules.map((module) => module.name).join(", ") || "a definir"}`,
+      `Tamanho inicial do cardápio: ${menuRange}`,
+      `Vídeo informado: ${videoSource}`,
       "Observação: este texto é um pedido de orçamento. Nenhum envio automático foi realizado.",
     ].join("\n");
 
@@ -127,6 +141,44 @@ export default function Home() {
     } catch {
       toast.error("Não foi possível copiar agora. Tente novamente.");
     }
+  };
+
+  const createSimulation = () => {
+    if (!projectName.trim()) {
+      toast.error("Informe o nome do negócio antes de criar a simulação.");
+      jumpTo("montagem");
+      return;
+    }
+
+    const reference = `S1-${new Date().getFullYear()}-${Math.random().toString(36).slice(2, 7).toUpperCase()}`;
+    setSimulationReference(reference);
+    setSimulationCode("");
+    setActivationStage("waiting");
+    toast.success("Pedido de demonstração criado apenas neste navegador.");
+  };
+
+  const confirmSimulation = () => {
+    const code = `SITE-${Math.random().toString(36).slice(2, 6).toUpperCase()}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
+    setSimulationCode(code);
+    setActivationStage("active");
+    toast.success("Ativação simulada concluída. Nenhum pagamento foi consultado.");
+  };
+
+  const copySimulationCode = async () => {
+    if (!simulationCode) return;
+    try {
+      await navigator.clipboard.writeText(simulationCode);
+      toast.success("Código de demonstração copiado.");
+    } catch {
+      toast.error("Não foi possível copiar agora. Tente novamente.");
+    }
+  };
+
+  const resetSimulation = () => {
+    setActivationStage("idle");
+    setSimulationReference("");
+    setSimulationCode("");
+    toast.message("A simulação foi limpa deste navegador.");
   };
 
   return (
@@ -140,6 +192,7 @@ export default function Home() {
         <nav className="topnav" aria-label="Navegação principal">
           <a href="#modulos">Módulos</a>
           <a href="#gastronomia">Restaurantes</a>
+          <a href="#ativacao">Simulação</a>
           <a href="#regras">Regras</a>
         </nav>
         <button className="nav-cta" type="button" onClick={() => jumpTo("montagem")}>
@@ -338,7 +391,7 @@ export default function Home() {
           <div className="brief-heading">
             <p className="eyebrow"><span /> SEU BRIEFING</p>
             <h2 id="brief-title">Sua página começa<br />por uma <em>escolha.</em></h2>
-            <p>Preencha o nome do negócio, revise as escolhas e copie o briefing. O botão não envia dados para ninguém.</p>
+              <p>Preencha o nome do negócio, revise as escolhas e copie o briefing. O botão não envia dados para ninguém.</p>
           </div>
           <div className="brief-console">
             <label className="project-input">
@@ -350,6 +403,40 @@ export default function Home() {
                 maxLength={70}
               />
             </label>
+            <div className="brief-local-options" aria-label="Opções locais para a demonstração">
+              <div className="local-option-group">
+                <span>TAMANHO INICIAL DO CARDÁPIO</span>
+                <div>
+                  {["Até 12 itens", "13 a 20 itens", "Mais de 20 itens"].map((range) => (
+                    <button
+                      key={range}
+                      type="button"
+                      className={menuRange === range ? "is-selected" : ""}
+                      onClick={() => setMenuRange(range)}
+                      aria-pressed={menuRange === range}
+                    >
+                      {range}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="local-option-group">
+                <span>VÍDEO NA PRIMEIRA VERSÃO</span>
+                <div>
+                  {["Link do YouTube", "Mídia do dono depois"].map((source) => (
+                    <button
+                      key={source}
+                      type="button"
+                      className={videoSource === source ? "is-selected" : ""}
+                      onClick={() => setVideoSource(source)}
+                      aria-pressed={videoSource === source}
+                    >
+                      {source}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
             <div className="brief-summary">
               <div className="summary-topline"><span>RESUMO DE MONTAGEM</span><span>{chosenModules.length} MÓDULOS</span></div>
               <div className="summary-plan"><span>{activePlan.label}</span><strong>{activePlan.price}</strong><small>{activePlan.total}</small></div>
@@ -361,6 +448,83 @@ export default function Home() {
               <Copy size={19} /> Copiar meu briefing
             </button>
             <p className="brief-disclaimer">Ao copiar, você decide por qual canal deseja falar. A SiteOne não envia pedido, foto, vídeo ou contato automaticamente.</p>
+          </div>
+        </section>
+
+        <section className="activation-section" id="ativacao" aria-labelledby="activation-title">
+          <div className="activation-intro">
+            <p className="eyebrow"><span /> ESTAÇÃO · ATIVAÇÃO</p>
+            <h2 id="activation-title">Veja o caminho antes<br />de existir uma <em>cobrança.</em></h2>
+            <p>Esta é uma demonstração local. Ela cria um número e um código apenas para você visualizar o fluxo do SiteOne; não acessa Mercado Pago, banco, bot ou WhatsApp.</p>
+            <div className="activation-assurance">
+              <ShieldCheck size={20} />
+              <span><b>SEM DADOS EXTERNOS</b> Tudo fica nesta tela até ela ser fechada ou recarregada.</span>
+            </div>
+          </div>
+
+          <div className="activation-console" aria-live="polite">
+            <div className="activation-console-top">
+              <span>FLUXO DE TESTE / SITEONE</span>
+              <span>{activationStage === "active" ? "ATIVO" : activationStage === "waiting" ? "AGUARDANDO" : "PRONTO"}</span>
+            </div>
+
+            <div className="activation-track" aria-label="Etapas da ativação simulada">
+              <div className={`activation-step ${activationStage !== "idle" ? "is-complete" : ""}`}>
+                <span>01</span><b>Pedido local</b><small>{activationStage === "idle" ? "a criar" : "criado"}</small>
+              </div>
+              <i aria-hidden="true" />
+              <div className={`activation-step ${activationStage === "active" ? "is-complete" : ""} ${activationStage === "waiting" ? "is-current" : ""}`}>
+                <span>02</span><b>Confirmação</b><small>{activationStage === "active" ? "simulada" : "aguarda teste"}</small>
+              </div>
+              <i aria-hidden="true" />
+              <div className={`activation-step ${activationStage === "active" ? "is-complete" : ""}`}>
+                <span>03</span><b>Ativação</b><small>{activationStage === "active" ? "código criado" : "a liberar"}</small>
+              </div>
+            </div>
+
+            <div className="activation-details">
+              <div>
+                <span>NEGÓCIO DE TESTE</span>
+                <b>{projectName.trim() || "Informe o nome acima"}</b>
+                <small>{menuRange} · {videoSource}</small>
+              </div>
+              <div>
+                <span>NÚMERO INTERNO</span>
+                <b>{simulationReference || "—"}</b>
+                <small>não foi enviado a ninguém</small>
+              </div>
+            </div>
+
+            {activationStage === "idle" && (
+              <button className="activation-action" type="button" onClick={createSimulation}>
+                <ClipboardCheck size={19} /> Criar pedido de demonstração
+              </button>
+            )}
+
+            {activationStage === "waiting" && (
+              <div className="activation-waiting">
+                <div><span>SIMULAÇÃO PRONTA</span><b>Agora teste a confirmação segura.</b><small>Na versão real, esta etapa só acontecerá após confirmação oficial do pagamento.</small></div>
+                <button className="activation-action orange-action" type="button" onClick={confirmSimulation}>
+                  <BadgeCheck size={19} /> Simular confirmação
+                </button>
+              </div>
+            )}
+
+            {activationStage === "active" && (
+              <div className="activation-result">
+                <div className="activation-code-block">
+                  <span>CÓDIGO DE DEMONSTRAÇÃO</span>
+                  <b>{simulationCode}</b>
+                  <small>Não é código real e não libera serviço.</small>
+                </div>
+                <div className="activation-result-actions">
+                  <button className="code-copy" type="button" onClick={copySimulationCode}><Copy size={17} /> Copiar código</button>
+                  <button className="code-reset" type="button" onClick={resetSimulation}><RotateCcw size={16} /> Nova simulação</button>
+                </div>
+              </div>
+            )}
+
+            <p className="activation-disclaimer"><KeyRound size={15} /> O código real só existirá em etapa futura, após pagamento confirmado por canal oficial e servidor protegido.</p>
           </div>
         </section>
 

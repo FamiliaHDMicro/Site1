@@ -90,3 +90,4 @@ O wordmark usa `HD` como bloco azul sólido e `Micro` em branco/grafite, acompan
 - A imagem principal privilegia diagramas, blocos, setas, anotações e folhas de montagem; evitar renderizações genéricas de SaaS com brilho excessivo.
 - **HDMicro** é a marca proprietária em todos os lockups. **SiteOne** aparece como produto subordinado: “SiteOne / microsites”.
 - A bancada de módulos deve parecer uma superfície de trabalho, conectando a seleção do visitante ao briefing e aos códigos de montagem.
+- A estação de ativação simulada deve parecer um console de oficina: etapas numeradas, estado visível e aviso inequívoco de que nenhum pagamento, bot ou dado externo foi usado.
