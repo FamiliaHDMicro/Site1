@@ -39,6 +39,7 @@
 - [x] Definir os 12 templates gerais em quatro grupos: 3 adolescente, 3 business, 3 presentes e 3 namoro/casamento/comemorações.
 - [x] Criar uma família separada com OneFood 01, OneFood 02 e OneFood 03, sem misturá-la aos 12 templates gerais.
 - [x] Substituir listas longas por seleção horizontal com abas e etapas numeradas, sem rolagem infinita.
+- [x] Corrigir a linguagem residual da capa e do briefing para apresentar templates prontos, não módulos ou peças avulsas.
 - [x] Bloquear o fluxo de sandbox quando a credencial não comprovar que gera apenas um endereço sandbox do Checkout Pro.
 - [x] Validar o Access Token pela criação controlada de uma preferência sandbox, sem deduzir o ambiente pelo prefixo da chave.
 - [ ] Rotacionar o token e a assinatura de Webhook já expostos em conversa antes de considerar os segredos protegidos.

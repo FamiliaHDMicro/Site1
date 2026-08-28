@@ -3,47 +3,22 @@
  * clara, técnica e acolhedora. A estação de ativação é um fluxo local de demonstração,
  * com azul HDMicro, papel quente e laranja gastronômico — sem pagamento ou dados externos.
  */
-import { useMemo, useState } from "react";
-import type { LucideIcon } from "lucide-react";
+import { useState } from "react";
 import {
   ArrowDownRight,
   ArrowUpRight,
   BadgeCheck,
-  BarChart3,
-  CalendarDays,
-  Camera,
-  Check,
   ClipboardCheck,
-  CircleHelp,
-  Clock3,
   Copy,
-  FileText,
-  Image as ImageIcon,
   KeyRound,
   MapPin,
-  MessageCircle,
-  Music2,
-  PhoneCall,
-  Play,
   RotateCcw,
-  Share2,
   ShieldCheck,
-  Sparkles,
-  Store,
-  UtensilsCrossed,
-  Video,
 } from "lucide-react";
 import { toast } from "sonner";
 import GastronomyStudio from "@/components/GastronomyStudio";
 import TemplatePicker, { type TemplateChoice } from "@/components/TemplatePicker";
 import TestCheckoutPanel from "@/components/TestCheckoutPanel";
-
-type Module = {
-  code: string;
-  name: string;
-  description: string;
-  Icon: LucideIcon;
-};
 
 type ActivationStage = "idle" | "waiting" | "active";
 
@@ -57,51 +32,18 @@ type RestaurantPlan = {
   detail: string;
 };
 
-type MenuItem = {
-  id: string;
-  category: string;
-  name: string;
-  description: string;
-  price: string;
-  available: boolean;
-};
-
-const generalModules: Module[] = [
-  { code: "M01", name: "Capa de impacto", description: "Apresentação direta do negócio", Icon: Sparkles },
-  { code: "M02", name: "Contato rápido", description: "Botões e caminhos de contato", Icon: MessageCircle },
-  { code: "M03", name: "Localização", description: "Mapa, endereço e como chegar", Icon: MapPin },
-  { code: "M04", name: "Galeria de fotos", description: "Espaço para fotos do negócio", Icon: Camera },
-  { code: "M05", name: "Vídeo de apresentação", description: "Vídeo fornecido pelo cliente", Icon: Video },
-  { code: "M06", name: "Trilha ou música", description: "Música licenciada pelo cliente", Icon: Music2 },
-  { code: "M07", name: "Serviços e ofertas", description: "O que o negócio faz e vende", Icon: Store },
-  { code: "M08", name: "Sobre o negócio", description: "História, propósito e diferenciais", Icon: FileText },
-  { code: "M09", name: "Horários", description: "Rotina de atendimento atualizada", Icon: Clock3 },
-  { code: "M10", name: "Agendamento", description: "Link ou orientação de reserva", Icon: CalendarDays },
-  { code: "M11", name: "Redes sociais", description: "Atalhos para os canais do cliente", Icon: Share2 },
-  { code: "M12", name: "Dúvidas frequentes", description: "Respostas para as perguntas comuns", Icon: CircleHelp },
-];
-
-const foodModules: Module[] = [
-  { code: "F01", name: "Cardápio digital", description: "Pratos, lanches e categorias", Icon: UtensilsCrossed },
-  { code: "F02", name: "Pedido por mensagem", description: "Caminho para o contato informado", Icon: MessageCircle },
-  { code: "F03", name: "Combos e novidades", description: "Área para promoções do dia", Icon: Sparkles },
-  { code: "F04", name: "Retirada ou entrega", description: "Como pedir e receber", Icon: Store },
-  { code: "F05", name: "Reservas", description: "Orientação para mesas e eventos", Icon: CalendarDays },
-  { code: "F06", name: "Horário e mapa", description: "Endereço, mapa e funcionamento", Icon: MapPin },
-];
-
 const plans = [
   {
     id: "base",
-    label: "Plano-base",
+    label: "Template essencial",
     price: "R$ 29,00",
     extra: "Entrada",
     total: "3 fotos · 2 vídeos · 1 música",
-    detail: "A base para colocar seu negócio no ar com uma página objetiva.",
+    detail: "Conteúdo inicial para preencher o template escolhido.",
   },
   {
     id: "up1",
-    label: "Upgrade 01",
+    label: "Conteúdo extra 01",
     price: "+ R$ 9,00",
     extra: "Amplie imagens",
     total: "5 fotos · 2 vídeos · 2 músicas",
@@ -109,7 +51,7 @@ const plans = [
   },
   {
     id: "up2",
-    label: "Upgrade 02",
+    label: "Conteúdo extra 02",
     price: "+ R$ 15,00",
     extra: "Amplie conteúdo",
     total: "6 fotos · 3 vídeos · 2 músicas",
@@ -124,28 +66,13 @@ function jumpTo(id: string) {
 export default function Home() {
   const [selectedPlan, setSelectedPlan] = useState("base");
   const [chosenTemplate, setChosenTemplate] = useState<TemplateChoice | null>(null);
-  const [selectedModules, setSelectedModules] = useState<string[]>([
-    "Capa de impacto",
-    "Contato rápido",
-    "Localização",
-  ]);
   const [projectName, setProjectName] = useState("");
-  const [menuRange, setMenuRange] = useState("Até 12 itens");
   const [videoSource, setVideoSource] = useState("Link do YouTube");
   const [activationStage, setActivationStage] = useState<ActivationStage>("idle");
   const [simulationReference, setSimulationReference] = useState("");
   const [simulationCode, setSimulationCode] = useState("");
 
   const activePlan = plans.find((plan) => plan.id === selectedPlan) ?? plans[0];
-  const allModules = useMemo(() => [...generalModules, ...foodModules], []);
-  const chosenModules = allModules.filter((module) => selectedModules.includes(module.name));
-
-  const toggleModule = (name: string) => {
-    setSelectedModules((current) =>
-      current.includes(name) ? current.filter((item) => item !== name) : [...current, name],
-    );
-  };
-
   const copyBriefing = async () => {
     const brief = [
       "BRIEFING SITEONE — HDMICRO",
@@ -227,11 +154,11 @@ export default function Home() {
         <section className="hero-section" aria-labelledby="hero-title">
           <div className="hero-grid">
             <div className="hero-copy">
-              <p className="eyebrow light"><span /> SITEONE / MICROSITES MODULARES</p>
+              <p className="eyebrow light"><span /> SITEONE / TEMPLATES PRONTOS</p>
               <h1 id="hero-title">O site certo para a <em>próxima venda.</em></h1>
               <p className="hero-text">
-                Em vez de um pacote genérico, você escolhe as peças que fazem sentido para o seu negócio.
-                A HDMicro organiza a montagem do seu microsite com regras claras.
+                Em vez de montar tudo do zero, você escolhe um template pronto para seu objetivo.
+                A HDMicro organiza seu microsite com regras claras e conteúdo fácil de preencher.
               </p>
               <div className="hero-actions">
                 <button className="primary-btn" type="button" onClick={() => jumpTo("templates")}>
@@ -251,24 +178,24 @@ export default function Home() {
               <div className="hero-blueprint">
                 <div className="blueprint-topline"><span>MAPA DE MONTAGEM / 01</span><span>HDM · BR</span></div>
                 <div className="blueprint-canvas">
-                  <div className="blueprint-piece piece-copy"><span>M01</span><b>CAPA</b><small>mensagem</small></div>
-                  <div className="blueprint-piece piece-media"><span>M04</span><b>FOTO</b><small>imagem</small></div>
-                  <div className="blueprint-piece piece-contact"><span>M02</span><b>CONTATO</b><small>conexão</small></div>
-                  <div className="blueprint-piece piece-map"><span>M03</span><b>MAPA</b><small>chegada</small></div>
+                  <div className="blueprint-piece piece-copy"><span>T01</span><b>MODELO</b><small>objetivo</small></div>
+                  <div className="blueprint-piece piece-media"><span>T02</span><b>FOTO</b><small>imagem</small></div>
+                  <div className="blueprint-piece piece-contact"><span>T03</span><b>CONTATO</b><small>conexão</small></div>
+                  <div className="blueprint-piece piece-map"><span>T04</span><b>MAPA</b><small>chegada</small></div>
                   <span className="blueprint-arrow arrow-a">→</span>
                   <span className="blueprint-arrow arrow-b">→</span>
                   <span className="blueprint-arrow arrow-c">↓</span>
                   <div className="blueprint-pin"><MapPin size={26} /></div>
-                  <div className="blueprint-note note-a">peças que<br />viram caminho</div>
-                  <div className="blueprint-note note-b">selecione<br />o necessário</div>
+                  <div className="blueprint-note note-a">templates que<br />viram página</div>
+                  <div className="blueprint-note note-b">escolha o<br />seu modelo</div>
                 </div>
-                <div className="blueprint-footer"><span>ESCOLHA</span><i /> <span>COMBINE</span><i /> <span>PUBLIQUE</span></div>
+                <div className="blueprint-footer"><span>ESCOLHA</span><i /> <span>PREENCHA</span><i /> <span>PUBLIQUE</span></div>
               </div>
             </div>
           </div>
           <div className="hero-ruler" aria-label="Etapas do processo">
             <span>01 <b>Escolha</b></span>
-            <span>02 <b>Combine</b></span>
+            <span>02 <b>Preencha</b></span>
             <span>03 <b>Publique</b></span>
             <span className="ruler-caption">PÁGINA DIRETA. ESCOLHAS CLARAS.</span>
           </div>
@@ -287,71 +214,24 @@ export default function Home() {
             </article>
             <article>
               <span className="step-number">02</span>
-              <h3>Escolha as peças</h3>
-              <p>Monte a página com módulos prontos. O resumo mostra exatamente o que foi escolhido.</p>
+              <h3>Escolha o template</h3>
+              <p>Selecione um modelo pronto para seu público. O resumo mostra exatamente o template escolhido.</p>
             </article>
             <article>
               <span className="step-number">03</span>
-              <h3>Envie o briefing</h3>
-              <p>Copie o pedido e envie pelo canal combinado. Nada é enviado sem você saber.</p>
+              <h3>Preencha e envie</h3>
+              <p>Organize o conteúdo e copie o briefing pelo canal combinado. Nada é enviado sem você saber.</p>
             </article>
           </div>
         </section>
 
         <TemplatePicker onChoose={setChosenTemplate} />
 
-        <section className="modules-section" id="modulos" aria-labelledby="modules-title">
-          <div className="modules-heading">
-            <div>
-              <p className="eyebrow"><span /> BANCADA SITEONE</p>
-              <h2 id="modules-title">12 módulos para montar<br /><em>do seu jeito.</em></h2>
-            </div>
-            <p className="section-copy">Clique nos módulos que fazem sentido. Cada seleção entra no seu briefing de proposta.</p>
-          </div>
-          <div className="modules-layout">
-            <div className="module-workbench-visual">
-              <div className="workbench-sheet" aria-hidden="true">
-                <div className="workbench-top"><span>FOLHA DE MONTAGEM</span><span>SELEÇÃO ATUAL</span></div>
-                <div className="workbench-count"><strong>{String(chosenModules.length).padStart(2, "0")}</strong><span>módulos<br />no briefing</span></div>
-                <div className="workbench-path"><span>M01</span><i>→</i><span>M02</span><i>→</i><span>M03</span></div>
-                <div className="workbench-sketch">
-                  <div className="sketch-browser"><span /><span /><span /></div>
-                  <div className="sketch-mobile"><span /><span /><span /></div>
-                  <div className="sketch-lines"><i /><i /><i /><i /></div>
-                </div>
-                <p>Não é pacote fechado.<br /><b>É página montada por decisão.</b></p>
-              </div>
-              <div className="visual-stamp"><span>12</span> PEÇAS<br />PRONTAS</div>
-            </div>
-            <div className="module-grid" aria-label="Módulos gerais disponíveis">
-              {generalModules.map((module) => {
-                const isChosen = selectedModules.includes(module.name);
-                const Icon = module.Icon;
-                return (
-                  <button
-                    className={`module-tile ${isChosen ? "is-chosen" : ""}`}
-                    key={module.code}
-                    type="button"
-                    onClick={() => toggleModule(module.name)}
-                    aria-pressed={isChosen}
-                  >
-                    <span className="module-code">{module.code}</span>
-                    <Icon size={21} strokeWidth={1.8} />
-                    <span className="module-name">{module.name}</span>
-                    <span className="module-detail">{module.description}</span>
-                    <span className="module-check"><Check size={13} /></span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
         <section className="pricing-section" id="planos" aria-labelledby="pricing-title">
           <div className="pricing-sidebar">
             <p className="eyebrow"><span /> REGRA CLARA</p>
             <h2 id="pricing-title">Conteúdo contado.<br /><em>Valor visível.</em></h2>
-            <p>O plano-base define a quantidade de mídia. Upgrades ampliam o conteúdo e mostram o novo total, sem letra pequena.</p>
+            <p>Para os templates gerais, você escolhe o conteúdo de partida e amplia a mídia quando precisar, sempre com o total visível.</p>
             <div className="pricing-side-note"><span>IMPORTANTE</span> Fotos, vídeos e músicas são fornecidos pelo cliente ou contratados à parte.</div>
           </div>
           <div className="pricing-plans" aria-label="Planos SiteOne">
@@ -371,44 +251,6 @@ export default function Home() {
                 <span className="plan-select">{selectedPlan === plan.id ? "Selecionado" : "Selecionar"} <ArrowDownRight size={16} /></span>
               </button>
             ))}
-          </div>
-        </section>
-
-        <section className="food-section" id="gastronomia" aria-labelledby="food-title">
-          <div className="food-copy">
-            <p className="eyebrow light orange"><span /> NICHO ESPECIAL</p>
-            <h2 id="food-title">Restaurante não vende<br />como qualquer <em>negócio.</em></h2>
-            <p>Para restaurantes e lanchonetes, a SiteOne traz seis módulos pensados para abrir apetite, orientar o pedido e facilitar a chegada.</p>
-            <div className="food-promise"><UtensilsCrossed size={20} /> Selecione os que entram no briefing junto com seus módulos gerais.</div>
-          </div>
-          <div className="food-stage">
-            <div className="food-menu-board" aria-hidden="true">
-              <div className="menu-board-top"><span>FOOD / 01</span><span>PRONTO PARA PEDIR</span></div>
-              <div className="menu-board-title">cardápio<br /><b>que abre caminho.</b></div>
-              <div className="menu-board-list"><span>LANCHES <i>→</i></span><span>COMBOS <i>→</i></span><span>ENTREGA <i>→</i></span></div>
-              <div className="menu-board-order"><UtensilsCrossed size={17} /><span>MENU + PEDIDO + MAPA</span></div>
-            </div>
-          </div>
-          <div className="food-list" aria-label="Módulos para restaurante e lanchonete">
-            {foodModules.map((module) => {
-              const isChosen = selectedModules.includes(module.name);
-              const Icon = module.Icon;
-              return (
-                <button
-                  className={`food-module ${isChosen ? "is-chosen" : ""}`}
-                  key={module.code}
-                  type="button"
-                  onClick={() => toggleModule(module.name)}
-                  aria-pressed={isChosen}
-                >
-                  <span>{module.code}</span>
-                  <Icon size={18} />
-                  <b>{module.name}</b>
-                  <small>{module.description}</small>
-                  {isChosen && <Check size={16} className="food-check" />}
-                </button>
-              );
-            })}
           </div>
         </section>
 
@@ -503,7 +345,7 @@ export default function Home() {
               <div>
                 <span>NEGÓCIO DE TESTE</span>
                 <b>{projectName.trim() || "Informe o nome acima"}</b>
-                <small>{menuRange} · {videoSource}</small>
+                <small>{chosenTemplate?.limit || "Escolha um template"} · {videoSource}</small>
               </div>
               <div>
                 <span>NÚMERO INTERNO</span>
@@ -553,11 +395,11 @@ export default function Home() {
           </div>
           <div className="rules-list">
             <details open>
-              <summary><span>01</span> O que entra no plano de R$ 29,00? <ArrowDownRight size={18} /></summary>
-              <p>Uma página SiteOne com os módulos escolhidos e até 3 fotos, 2 vídeos e 1 música fornecidos para o projeto.</p>
+              <summary><span>01</span> O que entra no template essencial de R$ 29,00? <ArrowDownRight size={18} /></summary>
+              <p>Um template geral SiteOne preenchido com até 3 fotos, 2 vídeos e 1 música fornecidos para o projeto.</p>
             </details>
             <details>
-              <summary><span>02</span> O que os upgrades acrescentam? <ArrowDownRight size={18} /></summary>
+              <summary><span>02</span> O que os conteúdos extras acrescentam? <ArrowDownRight size={18} /></summary>
               <p>O Upgrade 01 acrescenta 2 fotos e 1 música por R$ 9,00. O Upgrade 02 acrescenta 3 fotos, 1 vídeo e 1 música por R$ 15,00.</p>
             </details>
             <details>
@@ -574,7 +416,7 @@ export default function Home() {
 
       <footer className="site-footer">
         <div className="footer-brand"><img src="/manus-storage/hdmicro-mark_1af1da9e.png" alt="" /><span><b>HD</b>Micro</span><small>SiteOne / microsites</small></div>
-        <p>Microsites modulares para negócios locais. Tecnologia com escolha clara.</p>
+        <p>Templates de microsites para negócios locais. Tecnologia com escolha clara.</p>
         <button type="button" onClick={() => jumpTo("inicio")}>Voltar ao início <ArrowUpRight size={16} /></button>
       </footer>
     </div>
