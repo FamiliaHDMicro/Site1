@@ -21,7 +21,7 @@
   border-left: 4px solid #ff6b35;
   color: #ff6b35;
   content: "ESTAÇÃO · PLANO GASTRONÔMICO";
-  font: 700 9px "Space Grotesk", sans-serif;
+  font: 700 11px "Space Grotesk", sans-serif;
   letter-spacing: .15em;
 }
 
@@ -40,31 +40,32 @@
 .restaurant-plan { min-height: 322px; padding: 26px 23px 22px; display: flex; flex-direction: column; align-items: flex-start; gap: 9px; border-right: 1px solid #bac2ce; border-bottom: 1px solid #bac2ce; background: #f6f8fb; color: #061b3a; text-align: left; cursor: pointer; transition: transform 160ms ease-out, background 160ms ease-out, color 160ms ease-out; }
 .restaurant-plan:hover { background: #e9f1ff; transform: translateY(-3px); }
 .restaurant-plan.is-active { background: #061b3a; color: #fff; box-shadow: inset 0 5px 0 #ff6b35; }
-.restaurant-plan-label { color: #64738b; font: 700 10px "Space Grotesk", sans-serif; letter-spacing: .11em; text-transform: uppercase; }
+.restaurant-plan-label { color: #64738b; font: 700 12px "Space Grotesk", sans-serif; letter-spacing: .11em; text-transform: uppercase; }
 .restaurant-plan.is-active .restaurant-plan-label { color: #ffad8e; }
 .restaurant-plan strong { margin-top: 23px; font: 700 clamp(1.55rem, 2.25vw, 2.2rem) "Space Grotesk", sans-serif; letter-spacing: -.06em; }
 .restaurant-plan b { color: #146ef5; font: 700 18px "Space Grotesk", sans-serif; letter-spacing: -.05em; }
 .restaurant-plan.is-active b { color: #86b1fd; }
-.restaurant-plan-limit { margin-top: 13px; color: #5d6675; font-size: 11px; font-weight: 700; line-height: 1.35; }
+.restaurant-plan-limit { margin-top: 13px; color: #5d6675; font-size: 13px; font-weight: 700; line-height: 1.4; }
 .restaurant-plan.is-active .restaurant-plan-limit { color: #cfdbef; }
-.restaurant-plan small { color: #667489; font-size: 11px; line-height: 1.45; }
+.restaurant-plan-media { color: #bb4a22; font-size: 12px; font-weight: 700; line-height: 1.4; }.restaurant-plan.is-active .restaurant-plan-media { color: #ffbfaa; }
+.restaurant-plan small { color: #667489; font-size: 13px; line-height: 1.5; }
 .restaurant-plan.is-active small { color: #aec0de; }
-.restaurant-plan-action { margin-top: auto; padding-top: 12px; display: inline-flex; align-items: center; gap: 6px; color: #146ef5; font-size: 11px; font-weight: 700; }
+.restaurant-plan-action { margin-top: auto; padding-top: 12px; display: inline-flex; align-items: center; gap: 6px; color: #146ef5; font-size: 13px; font-weight: 700; }
 .restaurant-plan.is-active .restaurant-plan-action { color: #fff; }
-.restaurant-plan-note { grid-column: 2; margin: 17px 0 0; max-width: 640px; color: #667489; font-size: 11px; line-height: 1.45; }
+.restaurant-plan-note { grid-column: 2; margin: 17px 0 0; max-width: 640px; color: #667489; font-size: 13px; line-height: 1.55; }
 
 .menu-wizard-section { background: #e7e2d8; display: grid; grid-template-columns: minmax(270px, .63fr) minmax(600px, 1.37fr); gap: 70px; align-items: start; }
 .menu-wizard-section::before { content: "ESTAÇÃO · CARDÁPIO LOCAL"; border-color: #146ef5; color: #146ef5; }
 .menu-wizard-console { min-width: 0; padding: 24px; background: #061b3a; color: #fff; box-shadow: 17px 17px 0 #146ef5; }
-.menu-wizard-topline { display: flex; justify-content: space-between; gap: 15px; color: #9fc3ff; font: 700 9px "Space Grotesk", sans-serif; letter-spacing: .12em; }
+.menu-wizard-topline { display: flex; justify-content: space-between; gap: 15px; color: #9fc3ff; font: 700 11px "Space Grotesk", sans-serif; letter-spacing: .12em; }
 .menu-wizard-topline span:last-child { color: #ffad8e; }
 .menu-capacity-row { display: flex; justify-content: space-between; gap: 18px; align-items: center; margin-top: 25px; padding: 16px 0; border-top: 1px solid rgba(167,194,241,.3); border-bottom: 1px solid rgba(167,194,241,.3); }
-.menu-capacity-row span,.menu-editor-heading span { display: block; color: #ffad8e; font: 700 9px "Space Grotesk", sans-serif; letter-spacing: .11em; }
-.menu-capacity-row p { margin: 5px 0 0; color: #b9c9e2; font-size: 12px; }.menu-capacity-row p b { color: #fff; }
-.menu-capacity-actions { display: flex; gap: 7px; flex: 0 0 auto; }.menu-capacity-actions button { min-height: 35px; padding: 8px 10px; background: rgba(255,255,255,.08); border: 1px solid rgba(167,194,241,.37); color: #cbd9f0; cursor: pointer; font-size: 11px; font-weight: 700; }.menu-capacity-actions button.is-active { background: #ff6b35; border-color: #ff6b35; color: #fff; }
-.menu-editor-heading { margin: 24px 0 11px; display: flex; justify-content: space-between; align-items: end; gap: 12px; }.menu-editor-heading small { color: #9db2d4; font-size: 10px; line-height: 1.35; text-align: right; }
-.menu-editor { display: grid; gap: 5px; max-height: 545px; overflow-y: auto; padding-right: 3px; }.menu-item-row { display: grid; grid-template-columns: 26px 88px minmax(112px, 1fr) minmax(118px, 1.12fr) 76px minmax(114px, 1fr) 80px; gap: 5px; align-items: stretch; }.menu-item-row input,.menu-item-row select { min-width: 0; height: 39px; padding: 0 9px; border: 1px solid rgba(170,197,242,.25); background: rgba(5,28,61,.82); color: #f1f6ff; outline: none; font-size: 11px; }.menu-item-row input:focus,.menu-item-row select:focus { border-color: #86b1fd; }.menu-item-row input::placeholder { color: #7185a6; }.menu-item-row select { color: #b8cae8; }.menu-item-row select option { color: #061b3a; background: #fff; }.menu-item-number { display: grid; place-items: center; color: #9fc3ff; font: 700 9px "Space Grotesk", sans-serif; }.availability-toggle { height: 39px; padding: 0 6px; background: transparent; border: 1px solid rgba(170,197,242,.32); color: #b9c9e2; cursor: pointer; font-size: 9px; font-weight: 700; }.availability-toggle.is-available { border-color: #4dd2d2; color: #4dd2d2; }
-.menu-wizard-footer { margin-top: 17px; padding-top: 15px; border-top: 1px solid rgba(167,194,241,.3); display: flex; align-items: center; justify-content: space-between; gap: 16px; }.menu-wizard-footer p { margin: 0; max-width: 300px; color: #afc0df; font-size: 10px; line-height: 1.45; }.menu-wizard-footer p b { color: #fff; font-family: "Space Grotesk", sans-serif; letter-spacing: .06em; }.copy-menu { min-height: 42px; padding: 10px 13px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; background: #146ef5; color: #fff; cursor: pointer; font-size: 11px; font-weight: 700; transition: transform 160ms ease-out, background 160ms ease-out; }.copy-menu:hover { background: #075ae1; transform: translateY(-2px); }.copy-menu:active { transform: scale(.97); }
+.menu-capacity-row span,.menu-editor-heading span { display: block; color: #ffad8e; font: 700 11px "Space Grotesk", sans-serif; letter-spacing: .11em; }
+.menu-capacity-row p { margin: 5px 0 0; color: #b9c9e2; font-size: 14px; }.menu-capacity-row p b { color: #fff; }
+.menu-capacity-actions { display: flex; gap: 7px; flex: 0 0 auto; }.menu-capacity-actions button { min-height: 42px; padding: 9px 12px; background: rgba(255,255,255,.08); border: 1px solid rgba(167,194,241,.37); color: #cbd9f0; cursor: pointer; font-size: 13px; font-weight: 700; }.menu-capacity-actions button.is-active { background: #ff6b35; border-color: #ff6b35; color: #fff; }
+.menu-editor-heading { margin: 24px 0 11px; display: flex; justify-content: space-between; align-items: end; gap: 12px; }.menu-editor-heading small { color: #9db2d4; font-size: 12px; line-height: 1.4; text-align: right; }
+.menu-editor { display: grid; gap: 6px; max-height: 545px; overflow-y: auto; padding-right: 3px; }.menu-item-row { display: grid; grid-template-columns: 30px 100px minmax(130px, 1fr) minmax(136px, 1.12fr) 88px minmax(135px, 1fr) 96px; gap: 6px; align-items: stretch; }.menu-item-row input,.menu-item-row select { min-width: 0; height: 44px; padding: 0 10px; border: 1px solid rgba(170,197,242,.25); background: rgba(5,28,61,.82); color: #f1f6ff; outline: none; font-size: 13px; }.menu-item-row input:focus,.menu-item-row select:focus { border-color: #86b1fd; }.menu-item-row input::placeholder { color: #7185a6; }.menu-item-row select { color: #b8cae8; }.menu-item-row select option { color: #061b3a; background: #fff; }.menu-item-number { display: grid; place-items: center; color: #9fc3ff; font: 700 11px "Space Grotesk", sans-serif; }.availability-toggle { height: 44px; padding: 0 8px; background: transparent; border: 1px solid rgba(170,197,242,.32); color: #b9c9e2; cursor: pointer; font-size: 12px; font-weight: 700; }.availability-toggle.is-available { border-color: #4dd2d2; color: #4dd2d2; }
+.menu-wizard-footer { margin-top: 17px; padding-top: 15px; border-top: 1px solid rgba(167,194,241,.3); display: flex; align-items: center; justify-content: space-between; gap: 16px; }.menu-wizard-footer p { margin: 0; max-width: 330px; color: #afc0df; font-size: 13px; line-height: 1.55; }.menu-wizard-footer p b { color: #fff; font-family: "Space Grotesk", sans-serif; letter-spacing: .06em; }.copy-menu { min-height: 46px; padding: 11px 15px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; background: #146ef5; color: #fff; cursor: pointer; font-size: 13px; font-weight: 700; transition: transform 160ms ease-out, background 160ms ease-out; }.copy-menu:hover { background: #075ae1; transform: translateY(-2px); }.copy-menu:active { transform: scale(.97); }
 
 @media (max-width: 980px) {
   .restaurant-plans-section,.menu-wizard-section { grid-template-columns: 1fr; gap: 45px; }.restaurant-plan-grid { grid-template-columns: 1fr 1fr; }

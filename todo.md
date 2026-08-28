@@ -33,13 +33,19 @@
 - [x] Definir que, no primeiro lançamento, o bot será apenas um aviso interno ao proprietário e não enviará código ao cliente.
 - [x] Atualizar a interface com OneFood 01, OneFood 02 e OneFood 03, cada um com liberação única de R$100,00 e mensalidade própria.
 - [x] Definir a mensalidade OneFood: R$29,00 para 12 produtos/imagens, R$49,00 para 20 produtos/imagens e R$69,00 para 30 produtos/imagens.
-- [ ] Definir as regras de vídeos e músicas de cada template OneFood antes de exibir a oferta comercial final.
+- [x] Definir as regras de vídeos e músicas de cada template OneFood antes de exibir a oferta comercial final.
+- [x] Definir OneFood com links do YouTube, música opcional e até 1 vídeo nos planos 01/02 ou 2 vídeos no plano 03.
+- [x] Aplicar a regra aprovada: links do YouTube e música opcional para OneFood, sem upload de mídia nesta fase.
 - [x] Criar wizard local OneFood para organizar de 12, 20 ou 30 itens, categoria, preço, link de imagem e disponibilidade.
 - [x] Corrigir o catálogo: 12 templates gerais são modelos de microsite, não módulos de conteúdo.
 - [x] Definir os 12 templates gerais em quatro grupos: 3 adolescente, 3 business, 3 presentes e 3 namoro/casamento/comemorações.
 - [x] Criar uma família separada com OneFood 01, OneFood 02 e OneFood 03, sem misturá-la aos 12 templates gerais.
 - [x] Substituir listas longas por seleção horizontal com abas e etapas numeradas, sem rolagem infinita.
 - [x] Corrigir a linguagem residual da capa e do briefing para apresentar templates prontos, não módulos ou peças avulsas.
+- [x] Liberar o zoom nativo por dois dedos no celular, removendo o limite de ampliação do navegador.
+- [ ] Aumentar a legibilidade dos textos pequenos restantes na página pública, no seletor de templates e nos avisos principais.
+- [ ] Revalidar em celular a experiência completa com zoom nativo e textos críticos em tamanho confortável.
+- [ ] Publicar uma cópia organizada da versão atual no repositório GitHub FamiliaHDMicro/Site1, sem alterar Cloudflare.
 - [x] Bloquear o fluxo de sandbox quando a credencial não comprovar que gera apenas um endereço sandbox do Checkout Pro.
 - [x] Validar o Access Token pela criação controlada de uma preferência sandbox, sem deduzir o ambiente pelo prefixo da chave.
 - [ ] Rotacionar o token e a assinatura de Webhook já expostos em conversa antes de considerar os segredos protegidos.

@@ -10,6 +10,7 @@ type RestaurantPlan = {
   monthly: string;
   itemLimit: number;
   imageLimit: number;
+  media: string;
   detail: string;
 };
 
@@ -31,6 +32,7 @@ const restaurantPlans: RestaurantPlan[] = [
     monthly: "R$ 29 / mês",
     itemLimit: 12,
     imageLimit: 12,
+    media: "1 link do YouTube · música opcional",
     detail: "Cardápio enxuto com uma imagem para cada produto.",
   },
   {
@@ -40,6 +42,7 @@ const restaurantPlans: RestaurantPlan[] = [
     monthly: "R$ 49 / mês",
     itemLimit: 20,
     imageLimit: 20,
+    media: "1 link do YouTube · música opcional",
     detail: "Para lanchonetes com mais opções e uma imagem por produto.",
   },
   {
@@ -49,6 +52,7 @@ const restaurantPlans: RestaurantPlan[] = [
     monthly: "R$ 69 / mês",
     itemLimit: 30,
     imageLimit: 30,
+    media: "Até 2 links do YouTube · música opcional",
     detail: "Para cardápios maiores, com até 30 produtos e 30 imagens.",
   },
 ];
@@ -139,12 +143,13 @@ export default function GastronomyStudio({ businessName, initialPlanId }: { busi
               <strong>{plan.release}</strong>
               <b>{plan.monthly}</b>
               <span className="restaurant-plan-limit">Até {plan.itemLimit} produtos · até {plan.imageLimit} imagens</span>
+              <span className="restaurant-plan-media">{plan.media}</span>
               <small>{plan.detail}</small>
               <span className="restaurant-plan-action">{restaurantPlanId === plan.id ? "Plano selecionado" : "Selecionar plano"} <ArrowDownRight size={16} /></span>
             </button>
           ))}
         </div>
-        <p className="restaurant-plan-note">Cada produto tem uma imagem própria. Acima de 30 produtos/imagens, domínio, vídeos, impressora, PDV e integrações especiais são avaliados separadamente.</p>
+        <p className="restaurant-plan-note">Cada produto tem uma imagem própria. Vídeos entram por link do YouTube e música é opcional, sempre com direito de uso do dono. Acima de 30 produtos/imagens, domínio, impressora, PDV e integrações especiais são avaliados separadamente.</p>
       </section>
 
       <section className="menu-wizard-section" id="cardapio" aria-labelledby="menu-wizard-title">
