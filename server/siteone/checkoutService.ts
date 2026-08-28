@@ -48,7 +48,7 @@ export async function createTestPreference(reference: string, publicOrigin: stri
   const callbackUrl = `${publicOrigin}/api/payments/mercadopago/test`;
   const returnBase = `${publicOrigin}/?payment_test=1&reference=${encodeURIComponent(reference)}`;
   const now = new Date();
-  const expiresAt = new Date(now.getTime() + 30 * 60 * 1000);
+  const expiresAt = new Date(now.getTime() + 2 * 60 * 60 * 1000);
 
   const response = await preference.create({
     body: {

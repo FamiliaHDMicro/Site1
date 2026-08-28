@@ -44,6 +44,10 @@
 - [ ] Rotacionar o token e a assinatura de Webhook já expostos em conversa antes de considerar os segredos protegidos.
 - [x] Salvar pedidos de teste com dados mínimos e apagar a simulação de forma explícita.
 - [ ] Executar manualmente um Checkout Pro sandbox e conferir o retorno do Webhook antes de permitir qualquer uso comercial.
+- [x] Criar uma preferência sandbox para OneFood 01 e abrir o Checkout Pro sem realizar pagamento real.
+- [x] Recriar a preferência sandbox expirada com validade máxima de duas horas e abrir a nova tela de teste.
+- [x] Abrir manualmente a preferência sandbox já criada após a indisponibilidade temporária do navegador conectado.
+- [ ] Manter pausada a compra sandbox com usuário comprador de teste e a conferência do Webhook até decisão futura de lançamento.
 - [ ] Rotacionar as credenciais do Mercado Pago expostas em conversa antes de qualquer integração de produção.
 - [x] Auditar em modo somente-leitura o painel HTML do repositório histórico antes de reaproveitar qualquer código.
 - [x] Usar uma cópia local e superficial do repositório histórico, sem abrir o painel Cloudflare durante a comparação.
